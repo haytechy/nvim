@@ -1,0 +1,11 @@
+require('options')
+require('mappings')
+require('packer-config')
+require('nvim-tree-config')
+require('colorschemes-config.kanagawa')
+require('lualine-config')
+require('barbar-config')
+require('lsp-config.language-servers')
+require('lsp-config.nvim-cmp')
+require('treesitter-config')
+
