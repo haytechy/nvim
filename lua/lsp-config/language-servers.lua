@@ -32,10 +32,7 @@ local on_attach = function(client, bufnr)
 end
 -- Include the servers you want to have installed by default below
 local servers = {
-  "bashls",
   "pyright",
-  "emmet_ls",
-  "sumneko_lua"
 }
 
 for _, name in pairs(servers) do
