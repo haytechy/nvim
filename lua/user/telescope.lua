@@ -1,0 +1,1 @@
+require('telescope':wq).setup({})
