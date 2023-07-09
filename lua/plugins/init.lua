@@ -20,7 +20,7 @@ return {
     -- Lualine
     {
         'nvim-lualine/lualine.nvim',
-        depedencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("plugins.config.lualine")
         end,
@@ -44,6 +44,7 @@ return {
     -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
+        lazy = false,
         build = ':TSUpdate',
         config = function()
             require("plugins.config.treesitter")
