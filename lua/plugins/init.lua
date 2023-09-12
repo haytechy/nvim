@@ -1,17 +1,17 @@
 return {
     -- Telescope
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' },
         keys = {
-            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files"},
-            { "<leader>rg", "<cmd>Telescope live_grep<cr>", desc = "Find String"},
+            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+            { "<leader>rg", "<cmd>Telescope live_grep<cr>",  desc = "Find String" },
         },
     },
     -- Colorscheme
     {
         'rebelot/kanagawa.nvim',
-        lazy = false,
         config = function()
             vim.cmd([[colorscheme kanagawa]])
         end,
@@ -34,8 +34,7 @@ return {
             "MunifTanjim/nui.nvim",
         },
         keys = {
-            {"<C-n>", "<cmd>Neotree toggle<cr>", desc = "NeoTree"},
-
+            { "<C-n>", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
         },
         config = function()
             require("plugins.config.neo-tree")
@@ -44,9 +43,16 @@ return {
     -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
-        lazy = false,
         build = ':TSUpdate',
         config = function()
+            vim.fn.sign_define("DiagnosticSignError",
+                { text = " ", texthl = "DiagnosticSignError" })
+            vim.fn.sign_define("DiagnosticSignWarn",
+                { text = " ", texthl = "DiagnosticSignWarn" })
+            vim.fn.sign_define("DiagnosticSignInfo",
+                { text = " ", texthl = "DiagnosticSignInfo" })
+            vim.fn.sign_define("DiagnosticSignHint",
+                { text = "󰌵", texthl = "DiagnosticSignHint" })
             require("plugins.config.treesitter")
         end,
     },
@@ -54,16 +60,17 @@ return {
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
+        lazy = false,
         dependencies = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
+            { 'neovim/nvim-lspconfig' },             -- Required
+            { 'williamboman/mason.nvim' },           -- Optional
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},     -- Required
-            {'hrsh7th/cmp-nvim-lsp'}, -- Required
-            {'L3MON4D3/LuaSnip'},     -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         },
         config = function()
             require("plugins.config.lsp")

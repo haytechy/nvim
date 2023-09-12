@@ -1,12 +1,12 @@
-require 'neo-tree'.setup({
-    close_if_last_window = false,     -- Close Neo-tree if it is the last window left in the tab
+require("neo-tree").setup({
+    close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = true,
-    enable_normal_mode_for_inputs = false,                                 -- Enable normal mode for input dialogs.
-    open_files_do_not_replace_types = { "terminal", "trouble", "qf" },     -- when opening files, do not use windows containing these filetypes or buftypes
-    sort_case_insensitive = false,                                         -- used when sorting files and directories in the tree
-    sort_function = nil,                                                   -- use a custom function for sorting files and directories in the tree
+    enable_normal_mode_for_inputs = false,                             -- Enable normal mode for input dialogs.
+    open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
+    sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+    sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
     -- sort_function = function (a,b)
     --       if a.type == b.type then
     --           return a.path > b.path
@@ -64,6 +64,26 @@ require 'neo-tree'.setup({
                 staged    = "",
                 conflict  = "",
             }
+        },
+        -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
+        file_size = {
+            enabled = true,
+            required_width = 64, -- min width of window required to show this column
+        },
+        type = {
+            enabled = true,
+            required_width = 122, -- min width of window required to show this column
+        },
+        last_modified = {
+            enabled = true,
+            required_width = 88, -- min width of window required to show this column
+        },
+        created = {
+            enabled = true,
+            required_width = 110, -- min width of window required to show this column
+        },
+        symlink_target = {
+            enabled = false,
         },
     },
     -- A list of functions, each representing a global custom command
@@ -127,6 +147,7 @@ require 'neo-tree'.setup({
             ["?"] = "show_help",
             ["<"] = "prev_source",
             [">"] = "next_source",
+            ["i"] = "show_file_details",
         }
     },
     nesting_rules = {},
@@ -155,17 +176,17 @@ require 'neo-tree'.setup({
             },
         },
         follow_current_file = {
-            enabled = false,                      -- This will find and focus the file in the active buffer every time
+            enabled = false,                    -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false,              -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = false,            -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
-        group_empty_dirs = false,                 -- when true, empty folders will be grouped together
-        hijack_netrw_behavior = "open_default",   -- netrw disabled, opening a directory opens neo-tree
+        group_empty_dirs = false,               -- when true, empty folders will be grouped together
+        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
         -- in whatever position is specified in window.position
         -- "open_current",  -- netrw disabled, opening a directory opens within the
         -- window like netrw would, regardless of window.position
         -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-        use_libuv_file_watcher = false,   -- This will use the OS level file watchers to detect changes
+        use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
         -- instead of relying on nvim autocmd events.
         window = {
             mappings = {
@@ -180,6 +201,14 @@ require 'neo-tree'.setup({
                 ["<c-x>"] = "clear_filter",
                 ["[g"] = "prev_git_modified",
                 ["]g"] = "next_git_modified",
+                ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+                ["oc"] = { "order_by_created", nowait = false },
+                ["od"] = { "order_by_diagnostics", nowait = false },
+                ["og"] = { "order_by_git_status", nowait = false },
+                ["om"] = { "order_by_modified", nowait = false },
+                ["on"] = { "order_by_name", nowait = false },
+                ["os"] = { "order_by_size", nowait = false },
+                ["ot"] = { "order_by_type", nowait = false },
             },
             fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
                 ["<down>"] = "move_cursor_down",
@@ -189,7 +218,7 @@ require 'neo-tree'.setup({
             },
         },
 
-        commands = {}   -- Add a custom command or override a global one using the same function name
+        commands = {} -- Add a custom command or override a global one using the same function name
     },
     buffers = {
         follow_current_file = {
@@ -204,6 +233,13 @@ require 'neo-tree'.setup({
                 ["bd"] = "buffer_delete",
                 ["<bs>"] = "navigate_up",
                 ["."] = "set_root",
+                ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+                ["oc"] = { "order_by_created", nowait = false },
+                ["od"] = { "order_by_diagnostics", nowait = false },
+                ["om"] = { "order_by_modified", nowait = false },
+                ["on"] = { "order_by_name", nowait = false },
+                ["os"] = { "order_by_size", nowait = false },
+                ["ot"] = { "order_by_type", nowait = false },
             }
         },
     },
@@ -218,6 +254,13 @@ require 'neo-tree'.setup({
                 ["gc"] = "git_commit",
                 ["gp"] = "git_push",
                 ["gg"] = "git_commit_and_push",
+                ["o"]  = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+                ["oc"] = { "order_by_created", nowait = false },
+                ["od"] = { "order_by_diagnostics", nowait = false },
+                ["om"] = { "order_by_modified", nowait = false },
+                ["on"] = { "order_by_name", nowait = false },
+                ["os"] = { "order_by_size", nowait = false },
+                ["ot"] = { "order_by_type", nowait = false },
             }
         }
     }
