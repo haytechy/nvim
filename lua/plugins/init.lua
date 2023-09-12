@@ -1,10 +1,11 @@
 return {
     -- Telescope
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' },
         keys = {
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files"},
+            { "<leader>rg", "<cmd>Telescope live_grep<cr>", desc = "Find String"},
         },
     },
     -- Colorscheme
@@ -13,8 +14,6 @@ return {
         lazy = false,
         config = function()
             vim.cmd([[colorscheme kanagawa]])
-            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
         end,
     },
     -- Lualine
@@ -27,7 +26,8 @@ return {
     },
     -- Neo-tree
     {
-        'nvim-neo-tree/neo-tree.nvim', branch = "v2.x",
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -57,12 +57,7 @@ return {
         dependencies = {
             -- LSP Support
             {'neovim/nvim-lspconfig'},             -- Required
-            {                                      -- Optional
-                'williamboman/mason.nvim',
-                build = function()
-                    vim.cmd([[MasonUpdate]])
-                end,
-            },
+            {'williamboman/mason.nvim'},           -- Optional
             {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
             -- Autocompletion
