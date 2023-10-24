@@ -2,7 +2,7 @@ return {
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.2',
+        tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' },
         keys = {
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -11,9 +11,9 @@ return {
     },
     -- Colorscheme
     {
-        'rebelot/kanagawa.nvim',
+        "folke/tokyonight.nvim",
         config = function()
-            vim.cmd([[colorscheme kanagawa]])
+            vim.cmd([[colorscheme tokyonight-night]])
         end,
     },
     -- Lualine
@@ -59,8 +59,7 @@ return {
     -- LSP
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
-        lazy = false,
+        branch = 'v3.x',
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },             -- Required
@@ -75,5 +74,9 @@ return {
         config = function()
             require("plugins.config.lsp")
         end,
-    }
+    },
+    {
+        "christoomey/vim-tmux-navigator"
+
+    },
 }
