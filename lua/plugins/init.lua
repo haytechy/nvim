@@ -2,7 +2,7 @@ return {
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.4',
+        tag = '0.1.6',
         dependencies = { 'nvim-lua/plenary.nvim' },
         keys = {
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
@@ -45,14 +45,6 @@ return {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         config = function()
-            vim.fn.sign_define("DiagnosticSignError",
-                { text = " ", texthl = "DiagnosticSignError" })
-            vim.fn.sign_define("DiagnosticSignWarn",
-                { text = " ", texthl = "DiagnosticSignWarn" })
-            vim.fn.sign_define("DiagnosticSignInfo",
-                { text = " ", texthl = "DiagnosticSignInfo" })
-            vim.fn.sign_define("DiagnosticSignHint",
-                { text = "󰌵", texthl = "DiagnosticSignHint" })
             require("plugins.config.treesitter")
         end,
     },
@@ -77,6 +69,5 @@ return {
     },
     {
         "christoomey/vim-tmux-navigator"
-
     },
 }
