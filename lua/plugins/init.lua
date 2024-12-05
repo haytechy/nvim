@@ -26,18 +26,12 @@ return {
     },
     -- Neo-tree
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-        },
-        keys = {
-            { "<C-n>", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-        },
+        'stevearc/oil.nvim',
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
         config = function()
-            require("plugins.config.neo-tree")
+            require("plugins.config.oil")
         end,
     },
     -- Treesitter
