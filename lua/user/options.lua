@@ -20,8 +20,7 @@ local options = {
     hlsearch = false,
     incsearch = true,
     termguicolors = true,
-    scrolloff = 8,
-    laststatus = 3,
+    scrolloff = 10,
 }
 
 for k, v in pairs(options) do

@@ -1,13 +1,13 @@
 return {
-    -- Telescope
+    -- fzf
     {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.8',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        "ibhagwan/fzf-lua",
         keys = {
-            { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-            { "<leader>rg", "<cmd>Telescope live_grep<cr>",  desc = "Find String" },
+            { "<leader>ff", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files" },
         },
+        config = function()
+            require("plugins.config.fzf-lua")
+        end
     },
     -- Colorscheme
     {
@@ -16,20 +16,9 @@ return {
             vim.cmd([[colorscheme tokyonight-night]])
         end,
     },
-    -- Lualine
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require("plugins.config.lualine")
-        end,
-    },
-    -- Neo-tree
+    -- nvim-oil 
     {
         'stevearc/oil.nvim',
-        ---@module 'oil'
-        ---@type oil.SetupOpts
-        dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
         config = function()
             require("plugins.config.oil")
         end,
@@ -42,20 +31,42 @@ return {
             require("plugins.config.treesitter")
         end,
     },
+    -- Snacks
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        opts = {
+            bigfile = { enabled = true },
+            dashboard = { enabled = true},
+        },
+    },
+    -- Mini
+    {
+        'echasnovski/mini.nvim',
+        version = false,
+        config = function()
+            require("mini.icons").setup()
+            require("mini.statusline").setup()
+        end,
+    },
+    -- Autocomplete
+    {
+        'saghen/blink.cmp',
+        dependencies = 'rafamadriz/friendly-snippets',
+        version = 'v0.*',
+        opts = {
+            keymap = { preset = 'default' },
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
+            },
+        }
+    },
     -- LSP
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v4.x',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
-            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-        },
+        'neovim/nvim-lspconfig',
+        dependencies = 'saghen/blink.cmp',
         config = function()
             require("plugins.config.lsp")
         end,
