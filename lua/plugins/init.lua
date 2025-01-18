@@ -66,7 +66,11 @@ return {
     -- LSP
     {
         'neovim/nvim-lspconfig',
-        dependencies = 'saghen/blink.cmp',
+        dependencies = {
+            'saghen/blink.cmp',
+            'williamboman/mason.nvim',
+            "williamboman/mason-lspconfig.nvim",
+        },
         config = function()
             require("plugins.config.lsp")
         end,
