@@ -34,6 +34,7 @@ return {
     -- Snacks
     {
         "folke/snacks.nvim",
+        dependencies = {'echasnovski/mini.icons', version = false },
         priority = 1000,
         lazy = false,
         opts = {
