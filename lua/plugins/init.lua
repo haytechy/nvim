@@ -4,6 +4,7 @@ return {
         "ibhagwan/fzf-lua",
         keys = {
             { "<leader>ff", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files" },
+            { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "Find Files" },
         },
         config = function()
             require("plugins.config.fzf-lua")
@@ -14,13 +15,6 @@ return {
         "folke/tokyonight.nvim",
         config = function()
             vim.cmd([[colorscheme tokyonight-night]])
-        end,
-    },
-    -- nvim-oil 
-    {
-        'stevearc/oil.nvim',
-        config = function()
-            require("plugins.config.oil")
         end,
     },
     -- StatusLine
@@ -58,17 +52,19 @@ return {
     {
         'saghen/blink.cmp',
         dependencies = 'rafamadriz/friendly-snippets',
-        version = '*',
+        version = '1.*',
         opts = {
             keymap = { preset = 'default' },
             appearance = {
-                use_nvim_cmp_as_default = true,
                 nerd_font_variant = 'mono'
             },
-        },
-        sources = {
+            completion = { documentation = { auto_show = false } },
             default = { 'lsp', 'path', 'snippets', 'buffer' },
+                sources = {
+            },
+            fuzzy = { implementation = "prefer_rust_with_warning" }
         },
+        opts_extend = { "sources.default" }
     },
     -- LSP
     {
