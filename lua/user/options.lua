@@ -1,5 +1,4 @@
 local options = {
-    encoding = "utf-8",
     mouse = "a",
     cursorline = true,
     showmatch = true,
@@ -22,6 +21,7 @@ local options = {
     termguicolors = true,
     scrolloff = 10,
 }
+
 
 for k, v in pairs(options) do
     vim.opt[k] = v

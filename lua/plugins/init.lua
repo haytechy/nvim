@@ -2,9 +2,10 @@ return {
     -- fzf
     {
         "ibhagwan/fzf-lua",
+        lazy = false,
         keys = {
-            { "<leader>ff", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files" },
-            { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "Find Files" },
+            { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files" },
+            { "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Find Files" },
         },
         config = function()
             require("plugins.config.fzf-lua")
@@ -51,16 +52,18 @@ return {
     -- Autocomplete
     {
         'saghen/blink.cmp',
-        dependencies = 'rafamadriz/friendly-snippets',
+        dependencies = {'rafamadriz/friendly-snippets'},
         version = '1.*',
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
             keymap = { preset = 'default' },
             appearance = {
                 nerd_font_variant = 'mono'
             },
             completion = { documentation = { auto_show = false } },
-            default = { 'lsp', 'path', 'snippets', 'buffer' },
-                sources = {
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
             fuzzy = { implementation = "prefer_rust_with_warning" }
         },
