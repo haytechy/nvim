@@ -5,7 +5,7 @@ return {
         lazy = false,
         keys = {
             { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files" },
-            { "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Find Files" },
+            { "<leader>rg", "<cmd>FzfLua live_grep<cr>", desc = "Find Files" },
         },
         config = function()
             require("plugins.config.fzf-lua")
