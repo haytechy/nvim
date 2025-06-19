@@ -7,9 +7,7 @@ return {
             { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find Files" },
             { "<leader>rg", "<cmd>FzfLua live_grep<cr>", desc = "Find Files" },
         },
-        config = function()
-            require("plugins.config.fzf-lua")
-        end
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     -- Colorscheme
     {
@@ -34,8 +32,6 @@ return {
         lazy = false,
         opts = {
             bigfile = { enabled = true },
-            dashboard = { enabled = true},
-            picker = {enabled = true},
         },
         keys = {
             { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
@@ -69,17 +65,10 @@ return {
         },
         opts_extend = { "sources.default" }
     },
-    -- LSP
+    -- Mason
     {
-        'neovim/nvim-lspconfig',
-        dependencies = {
-            'saghen/blink.cmp',
-            'williamboman/mason.nvim',
-            "williamboman/mason-lspconfig.nvim",
-        },
-        config = function()
-            require("plugins.config.lsp")
-        end,
+        "mason-org/mason.nvim",
+        opts = {}
     },
     {
         "christoomey/vim-tmux-navigator"
